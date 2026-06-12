@@ -74,6 +74,10 @@ mvn test
 ### 🏃‍♂️ Ejecución de Pruebas
 Para ejecutar la suite de pruebas unitarias del frontend, navegue al directorio `frontend` y ejecute:
 ```bash
+# Navegar al directorio del frontend
+cd frontend
+
+# Compilar y ejecutar
 npx ng test
 ```
 
