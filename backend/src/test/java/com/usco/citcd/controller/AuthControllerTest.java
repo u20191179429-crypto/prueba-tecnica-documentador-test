@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -25,155 +24,155 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class AuthControllerTest {
 
-    @Mock
-    private AuthenticationManager authenticationManager;
+        @Mock
+        private AuthenticationManager authenticationManager;
 
-    @InjectMocks
-    private AuthController authController;
+        @InjectMocks
+        private AuthController authController;
 
-    @Test
-    void loginConRolAdmin() {
+        @Test
+        void loginConRolAdmin() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("admin");
-        request.setPassword("admin123");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("admin");
+                request.setPassword("admin123");
 
-        Authentication auth = mock(Authentication.class);
+                Authentication auth = mock(Authentication.class);
 
-        doReturn(List.of(new SimpleGrantedAuthority("ROLE_ADMIN")))
-                .when(auth).getAuthorities();
+                doReturn(List.of(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                                .when(auth).getAuthorities();
 
-        when(authenticationManager.authenticate(any()))
-                .thenReturn(auth);
+                when(authenticationManager.authenticate(any()))
+                                .thenReturn(auth);
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(200, response.getStatusCode().value());
-        Usuario usuario = (Usuario) response.getBody();
-        assertNotNull(usuario);
-        assertEquals("ADMIN", usuario.getRol());
-    }
+                assertEquals(200, response.getStatusCode().value());
+                Usuario usuario = (Usuario) response.getBody();
+                assertNotNull(usuario);
+                assertEquals("ADMIN", usuario.getRol());
+        }
 
-    @Test
-    void loginConRolDocente() {
+        @Test
+        void loginConRolDocente() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("docente");
-        request.setPassword("docente123");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("docente");
+                request.setPassword("docente123");
 
-        Authentication auth = mock(Authentication.class);
+                Authentication auth = mock(Authentication.class);
 
-        doReturn(List.of(new SimpleGrantedAuthority("ROLE_DOCENTE")))
-                .when(auth).getAuthorities();
+                doReturn(List.of(new SimpleGrantedAuthority("ROLE_DOCENTE")))
+                                .when(auth).getAuthorities();
 
-        when(authenticationManager.authenticate(any()))
-                .thenReturn(auth);
+                when(authenticationManager.authenticate(any()))
+                                .thenReturn(auth);
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(200, response.getStatusCode().value());
-        Usuario usuario = (Usuario) response.getBody();
-        assertNotNull(usuario);
-        assertEquals("DOCENTE", usuario.getRol());
-    }
+                assertEquals(200, response.getStatusCode().value());
+                Usuario usuario = (Usuario) response.getBody();
+                assertNotNull(usuario);
+                assertEquals("DOCENTE", usuario.getRol());
+        }
 
-    @Test
-    void loginConRolEstudiante() {
+        @Test
+        void loginConRolEstudiante() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("estudiante");
-        request.setPassword("estudiante123");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("estudiante");
+                request.setPassword("estudiante123");
 
-        Authentication auth = mock(Authentication.class);
+                Authentication auth = mock(Authentication.class);
 
-        doReturn(List.of(new SimpleGrantedAuthority("ROLE_ESTUDIANTE")))
-                .when(auth).getAuthorities();
+                doReturn(List.of(new SimpleGrantedAuthority("ROLE_ESTUDIANTE")))
+                                .when(auth).getAuthorities();
 
-        when(authenticationManager.authenticate(any()))
-                .thenReturn(auth);
+                when(authenticationManager.authenticate(any()))
+                                .thenReturn(auth);
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(200, response.getStatusCode().value());
-        Usuario usuario = (Usuario) response.getBody();
-        assertNotNull(usuario);
-        assertEquals("ESTUDIANTE", usuario.getRol());
-    }
+                assertEquals(200, response.getStatusCode().value());
+                Usuario usuario = (Usuario) response.getBody();
+                assertNotNull(usuario);
+                assertEquals("ESTUDIANTE", usuario.getRol());
+        }
 
-    @Test
-    void loginFallido() {
-        LoginRequest request = new LoginRequest();
-        request.setUsername("admin");
-        request.setPassword("Incorrecto123");
+        @Test
+        void loginFallido() {
+                LoginRequest request = new LoginRequest();
+                request.setUsername("admin");
+                request.setPassword("Incorrecto123");
 
-        // Simular error
-        when(authenticationManager.authenticate(any()))
-                .thenThrow(new BadCredentialsException("Error"));
+                // Simular error
+                when(authenticationManager.authenticate(any()))
+                                .thenThrow(new BadCredentialsException("Error"));
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(401, response.getStatusCode().value());
-        assertTrue(response.getBody().toString().contains("Credenciales inválidas"));
-    }
+                assertEquals(401, response.getStatusCode().value());
+                assertTrue(response.getBody().toString().contains("Credenciales inválidas"));
+        }
 
-    @Test
-    void loginUsuarioVacio() {
+        @Test
+        void loginUsuarioVacio() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("");
-        request.setPassword("123");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("");
+                request.setPassword("123");
 
-        when(authenticationManager.authenticate(any()))
-                .thenThrow(new BadCredentialsException("Error"));
+                when(authenticationManager.authenticate(any()))
+                                .thenThrow(new BadCredentialsException("Error"));
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(401, response.getStatusCode().value());
-    }
+                assertEquals(401, response.getStatusCode().value());
+        }
 
-    @Test
-    void loginContrasenaVacia() {
+        @Test
+        void loginContrasenaVacia() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("admin");
-        request.setPassword("");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("admin");
+                request.setPassword("");
 
-        when(authenticationManager.authenticate(any()))
-                .thenThrow(new BadCredentialsException("Error"));
+                when(authenticationManager.authenticate(any()))
+                                .thenThrow(new BadCredentialsException("Error"));
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(401, response.getStatusCode().value());
-    }
+                assertEquals(401, response.getStatusCode().value());
+        }
 
-    @Test
-    void loginAmbosVacios() {
+        @Test
+        void loginAmbosVacios() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("");
-        request.setPassword("");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("");
+                request.setPassword("");
 
-        when(authenticationManager.authenticate(any()))
-                .thenThrow(new BadCredentialsException("Error"));
+                when(authenticationManager.authenticate(any()))
+                                .thenThrow(new BadCredentialsException("Error"));
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(401, response.getStatusCode().value());
-    }
+                assertEquals(401, response.getStatusCode().value());
+        }
 
-    @Test
-    void loginUsuarioInexistente() {
+        @Test
+        void loginUsuarioInexistente() {
 
-        LoginRequest request = new LoginRequest();
-        request.setUsername("noexiste");
-        request.setPassword("1234");
+                LoginRequest request = new LoginRequest();
+                request.setUsername("noexiste");
+                request.setPassword("1234");
 
-        when(authenticationManager.authenticate(any()))
-                .thenThrow(new BadCredentialsException("Usuario no encontrado"));
+                when(authenticationManager.authenticate(any()))
+                                .thenThrow(new BadCredentialsException("Usuario no encontrado"));
 
-        ResponseEntity<?> response = authController.login(request);
+                ResponseEntity<?> response = authController.login(request);
 
-        assertEquals(401, response.getStatusCode().value());
-    }
+                assertEquals(401, response.getStatusCode().value());
+        }
 
 }
