@@ -9,68 +9,6 @@ Como parte de la validación técnica del sistema, se ha implementado una suite 
 * **Validaciones:** Jakarta Bean Validation (`LocalValidatorFactoryBean`)
 * **Serialización:** Jackson `JavaTimeModule` (Soporte para manejo de fechas en Java 8)
 
----
-
-## 📁 Estructura del Proyecto
-
-```
-├── backend/
-│   ├── pom.xml
-│   └── src/
-│       ├── main/java/com/usco/citcd/
-│       │   ├── SolicitudesCitcdApplication.java
-│       │   ├── config/
-│       │   │   └── SecurityConfig.java
-│       │   ├── controller/
-│       │   │   ├── AuthController.java
-│       │   │   └── SolicitudController.java
-│       │   ├── model/
-│       │   │   ├── LoginRequest.java
-│       │   │   ├── Solicitud.java
-│       │   │   └── Usuario.java
-│       │   └── service/
-│       │       └── SolicitudService.java
-│       └── test/java/com/usco/citcd/
-│           ├── controller/
-│           │   ├── AuthControllerTest.java
-│           │   └── SolicitudControllerTest.java
-│           └── service/
-│               └── SolicitudServiceTest.java
-│
-├── frontend/
-│   ├── angular.json
-│   ├── package.json
-│   └── src/app/
-│       ├── app.component.ts
-│       ├── app.config.ts
-│       ├── app.routes.ts
-│       ├── guards/
-│       │   └── auth.guard.ts
-│       ├── models/
-│       │   ├── solicitud.model.ts
-│       │   └── usuario.model.ts
-│       ├── services/
-│       │   ├── auth.service.ts
-│       │   ├── solicitud.service.ts
-│       │   └── solicitud.service.spec.ts
-│       └── components/
-│           ├── login/
-│           │   ├── login.component.ts
-│           │   └── login.component.spec.ts
-│           ├── navbar/
-│           │   └── navbar.component.ts
-│           ├── formulario-solicitud/
-│           │   ├── formulario-solicitud.component.ts
-│           │   └── formulario-solicitud.component.spec.ts
-│           ├── lista-solicitudes/
-│           │   └── lista-solicitudes.component.ts
-│           └── filtrar-solicitudes/
-│               └── filtrar-solicitudes.component.ts
-│
-└── README.md
-```
-
----
 
 ### 🏃‍♂️ Ejecución de Pruebas
 Para correr la suite de pruebas unitarias y de integración, abra su terminal, navegue al directorio raíz del `backend` y ejecute:
@@ -193,4 +131,67 @@ debe rellenar el formulario al usar el método fillCredentials()(4ms)
 debe mostrar mensaje de error 401 si las credenciales son inválidas(8ms)
 debe crear el componente(2ms)
 ```
+---
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+├── backend/
+│   ├── pom.xml
+│   └── src/
+│       ├── main/java/com/usco/citcd/
+│       │   ├── SolicitudesCitcdApplication.java
+│       │   ├── config/
+│       │   │   └── SecurityConfig.java
+│       │   ├── controller/
+│       │   │   ├── AuthController.java
+│       │   │   └── SolicitudController.java
+│       │   ├── model/
+│       │   │   ├── LoginRequest.java
+│       │   │   ├── Solicitud.java
+│       │   │   └── Usuario.java
+│       │   └── service/
+│       │       └── SolicitudService.java
+│       └── test/java/com/usco/citcd/
+│           ├── controller/
+│           │   ├── AuthControllerTest.java
+│           │   └── SolicitudControllerTest.java
+│           └── service/
+│               └── SolicitudServiceTest.java
+│
+├── frontend/
+│   ├── angular.json
+│   ├── package.json
+│   └── src/app/
+│       ├── app.component.ts
+│       ├── app.config.ts
+│       ├── app.routes.ts
+│       ├── guards/
+│       │   └── auth.guard.ts
+│       ├── models/
+│       │   ├── solicitud.model.ts
+│       │   └── usuario.model.ts
+│       ├── services/
+│       │   ├── auth.service.ts
+│       │   ├── solicitud.service.ts
+│       │   └── solicitud.service.spec.ts
+│       └── components/
+│           ├── login/
+│           │   ├── login.component.ts
+│           │   └── login.component.spec.ts
+│           ├── navbar/
+│           │   └── navbar.component.ts
+│           ├── formulario-solicitud/
+│           │   ├── formulario-solicitud.component.ts
+│           │   └── formulario-solicitud.component.spec.ts
+│           ├── lista-solicitudes/
+│           │   └── lista-solicitudes.component.ts
+│           └── filtrar-solicitudes/
+│               └── filtrar-solicitudes.component.ts
+│
+└── README.md
+```
+
 ---
